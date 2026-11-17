@@ -1,0 +1,48 @@
+# Podman Compose — Sistem Absensi Wajah
+# Jalankan: ./scripts/podman-up.sh  atau  podman compose -f deploy/compose.yaml up -d --build
+
+services:
+  facerec-api:
+    build:
+      context: ..
+      dockerfile: deploy/Containerfile.api
+    image: facerec-api:latest
+    container_name: facerec-api
+    volumes:
+      - facerec-data:/data
+    environment:
+      DATA_DIR: /data
+      DB_FILE: /data/absensi.db
+      FACES_FILE: /data/faces_data.pkl
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      SECRET_KEY: ${SECRET_KEY:-}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-480}
+      TZ: ${TZ:-Asia/Jakarta}
+    restart: unless-stopped
+    networks:
+      - facerec-net
+
+  nginx:
+    build:
+      context: ..
+      dockerfile: deploy/Containerfile.nginx
+    image: facerec-nginx:latest
+    container_name: facerec-nginx
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8443}:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro,Z
+    depends_on:
+      facerec-api:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - facerec-net
+
+volumes:
+  facerec-data:
+
+networks:
+  facerec-net:
+    driver: bridge

@@ -1,0 +1,5 @@
+# Dev/test dependencies — install bersama requirements-web.txt
+# Gunakan: pip install -r requirements-web.txt -r requirements-dev.txt
+-r requirements-web.txt
+
+pytest>=8.0.0

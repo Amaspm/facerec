@@ -1,0 +1,13 @@
+Ketika mulai kamera saat registrasi tampilkan kotak ketika wajah terdeteksi. 
+Waktunya eror, pakai waktu di laptop saja
+Ketika cetak absensi, tampilkan semua murid yang terdaftar dan urutkan sesuai nomor absen
+Buat halaman admin yang isinya bisa untuk melihat daftar peserta dan info siswa seperti no absen, nama, dan wajahnya ketika registrasi. berikan fitur untuk edit info peserta (no absen, nama, foto jika ingin mengupdate foto alias daftar ulang)
+Perbaiki tabel ketika dicetak pdf supaya lebih rapi untuk pekanan. atur tabel untuk hari senin-jumat saja dalam sepekan.
+contoh tabel:
+| No Absen| Nama  | Senin | Waktu | Selasa | Waktu | Rabu | Waktu | Kamis | Waktu | Jumat | Waktu |
+| --      | ----- | ----- | ----- | ------ | ----- | ---- | ----- | ----- | ----- | ----- | ----- |
+| 1       | Ahmad | H     | 06:54 | H      | 06:58 | TH   | -     | H     | 06:52 | H     | 06:56 |
+| 2       | Budi  | H     | 07:01 | TH     | -     | H    | 06:57 | H     | 06:59 | H     | 06:55 |
+
+H = Hadir
+TH = Tidak Hadir
